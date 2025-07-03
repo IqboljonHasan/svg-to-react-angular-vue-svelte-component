@@ -1,83 +1,141 @@
-# svg-to-react
+# svg-to-react (and more)
 
-Convert SVG files into reusable, typed React components with ease.  
-This tool wraps SVG elements in a custom `withSvg` HOC, enabling flexible `size`, `color`, and `className` support — ideal for icons exported from Figma or similar tools.
+Convert your SVG icons (e.g. from Figma) into reusable components for **React**, **Vue**, **Svelte**, and **Angular** — all with proper props, accessibility support, and TypeScript.
 
-A simple and scalable tool to convert SVG files into reusable, typed React components using a custom `withSvg` wrapper.
+---
 
-Ideal for turning Figma-exported icons into flexible, theme-ready React components.
+## ✨ Features
 
-
+- 🧠 Framework-agnostic SVG parser
+- ⚛️ React components using a custom `withSvg` HOC
+- 🔥 Vue 3 `<script setup>` SFCs
+- 🟠 Svelte components with full reactivity
+- 🅰️ Angular standalone components
+- 🎨 All icons support `size`, `color`, `strokeWidth`, `fill`, `title`, `aria-hidden`, `role`
+- 🧹 Cleans output directories before generation
+- 📦 Outputs tree-shakable files with named exports
 
 ---
 
 ## 📁 Folder Structure
 
+```
 svg-to-react/
-├── dist/ # Output directory (auto-generated)
-│ └── components/icons/ # Generated .tsx icon components
+├── dist/
+│   ├── react/
+│   ├── vue/
+│   ├── svelte/
+│   └── angular/
 ├── src/
-│ ├── icons-svg/ # Your raw .svg icon files
-│ └── shared/
-│ ├── functions/ # Utility functions for generation
-│ └── hoc/
-│ └── withSvg.tsx # React HOC wrapper
-├── main.ts # Script entry point
+│   ├── icons-svg/            # Input .svg files
+│   ├── generators/           # Per-framework generators
+│   │   ├── react.ts
+│   │   ├── vue.ts
+│   │   ├── svelte.ts
+│   │   └── angular.ts
+│   ├── shared/               # Utility and parser functions
+│   │   ├── parser.ts
+│   │   └── utils.ts
+│   └── main.ts               # Entrypoint
+├── package.json
 ├── tsconfig.json
-├── README.md
-
+└── README.md
+```
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Usage
 
-### 1. Install dependencies
+### 1. Install
 
 ```bash
 npm install
-# or
-pnpm install
-
 ```
 
-### 2. Add SVG files
-Place your .svg files into the src/icons-svg/ folder.
+### 2. Add your `.svg` icons
 
-### 3. Generate React components
+Put them in:  
 ```
-npx ts-node main.ts
+src/icons-svg/
 ```
 
-This will:
+---
 
-Clean dist/components/icons/
+### 3. Run Generators
 
-Convert SVGs to React components
-
-Create a barrel index.ts for easy imports
-
-## 🧑‍💻 Usage Example
-
+```bash
+npm run generate:react
+npm run generate:vue
+npm run generate:svelte
+npm run generate:angular
+npm run generate:all   # To generate all at once
 ```
-import { Add01 } from "@/components/icons"
 
-export default function App() {
-  return (
-    <Add01 size={24} color="blue" className="hover:scale-110" />
-  )
+---
+
+## 📦 Import Examples
+
+### ✅ React
+
+```tsx
+import { AddIcon } from "@/components/icons"
+<AddIcon size={24} color="blue" title="Add" />
+```
+
+### ✅ Vue
+
+```vue
+<AddIcon size="32" color="red" title="Add item" />
+```
+
+### ✅ Svelte
+
+```svelte
+<AddIcon size={20} color="green" title="Submit" />
+```
+
+### ✅ Angular
+
+```html
+<icon-add [size]="28" color="purple" [title]="'Delete'" />
+```
+
+---
+
+## 💡 Icon Props (All Frameworks)
+
+| Prop         | Type             | Description                              |
+|--------------|------------------|------------------------------------------|
+| `size`       | `number`         | Icon size in pixels                      |
+| `color`      | `string`         | Stroke color (`currentColor` default)    |
+| `strokeWidth`| `number`         | Stroke width (default: `1.5`)            |
+| `fill`       | `string`         | Fill color (`none` default)              |
+| `title`      | `string`         | Accessible label (renders `<title>`)     |
+| `ariaHidden` | `boolean`        | Whether to hide from screen readers      |
+| `role`       | `string`         | Accessibility role (`img`, `presentation`) |
+
+---
+
+## 📜 Scripts
+
+```json
+"scripts": {
+  "generate:react": "ts-node src/main.ts react",
+  "generate:vue": "ts-node src/main.ts vue",
+  "generate:svelte": "ts-node src/main.ts svelte",
+  "generate:angular": "ts-node src/main.ts angular",
+  "generate:all": "npm run generate:react && npm run generate:vue && npm run generate:svelte && npm run generate:angular"
 }
-
 ```
 
-## 🛠 Customization
+---
 
-You can customize the behavior of all generated icon components by editing:
+## 📃 License
 
-`src/shared/hoc/withSvg.tsx`
+MIT
 
-For example, you can:
+---
 
-- Add `role="img"` or `aria-hidden` for accessibility
-- Add extra props like `strokeWidth`, `fill`, or `title`
-- Control SVG rendering logic (e.g., default `viewBox`, styles, etc.)
+## 🙌 Credits
 
+Built with ❤️ to streamline icon usage across modern frontend frameworks.
