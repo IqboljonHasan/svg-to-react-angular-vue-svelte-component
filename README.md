@@ -1,4 +1,4 @@
-# svg-to-react (and more)
+# svg-to-react-vue-angular-svelte-component
 
 Convert your SVG icons (e.g. from Figma) into reusable components for **React**, **Vue**, **Svelte**, and **Angular** — all with proper props, accessibility support, and TypeScript.
 
@@ -14,33 +14,6 @@ Convert your SVG icons (e.g. from Figma) into reusable components for **React**,
 - 🎨 All icons support `size`, `color`, `strokeWidth`, `fill`, `title`, `aria-hidden`, `role`
 - 🧹 Cleans output directories before generation
 - 📦 Outputs tree-shakable files with named exports
-
----
-
-## 📁 Folder Structure
-
-```
-svg-to-react/
-├── dist/
-│   ├── react/
-│   ├── vue/
-│   ├── svelte/
-│   └── angular/
-├── src/
-│   ├── icons-svg/            # Input .svg files
-│   ├── generators/           # Per-framework generators
-│   │   ├── react.ts
-│   │   ├── vue.ts
-│   │   ├── svelte.ts
-│   │   └── angular.ts
-│   ├── shared/               # Utility and parser functions
-│   │   ├── parser.ts
-│   │   └── utils.ts
-│   └── main.ts               # Entrypoint
-├── package.json
-├── tsconfig.json
-└── README.md
-```
 
 ---
 
