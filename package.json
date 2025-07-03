@@ -1,14 +1,29 @@
 {
-  "name": "svg2tsx",
-  "version": "1.0.0",
+  "name": "svg-to-react-vue-svelte-angular",
+  "version": "0.0.1",
   "main": "main.ts",
   "scripts": {
-    "convert": "ts-node main.ts"
+    "generate:react": "ts-node main.ts react",
+    "generate:vue": "ts-node main.ts vue",
+    "generate:svelte": "ts-node main.ts svelte",
+    "generate:angular": "ts-node main.ts angular",
+    "generate:all": "npm run generate:react && npm run generate:vue && npm run generate:svelte && npm run generate:angular"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "svg",
+    "react",
+    "vue",
+    "svelte",
+    "angular",
+    "icons",
+    "generator",
+    "convert",
+    "ts",
+    "typescript"
+  ],
+  "author": "Iqboljon Hasan",
   "license": "ISC",
-  "description": "",
+  "description": "A tool for converting SVG icons to React, Vue, Svelte, and Angular components",
   "devDependencies": {
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"

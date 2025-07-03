@@ -1,23 +1,54 @@
-// src/components/icons/withSvg.tsx
+import type { SVGProps } from "react"
+import React from "react"
 
-import type { SVGProps, FC } from "react"
-
-export interface IconProps extends SVGProps<SVGSVGElement> {
+type BaseProps = SVGProps<SVGSVGElement> & {
   size?: number
   color?: string
+  fill?: string
 }
 
-export function withSvg(Path: JSX.Element): FC<IconProps> {
-  return ({ size = 20, color, viewBox = "0 0 24 24", ...props }) => (
+/**
+ * Icon is visible to screen readers (accessibility required)
+ * 👉 Must provide a `title`
+ */
+type AccessibleProps = {
+  "aria-hidden"?: false
+  role?: "img"
+  title: string
+}
+
+/**
+ * Icon is hidden from screen readers
+ * 👉 Should not have `title`
+ */
+type DecorativeProps = {
+  "aria-hidden"?: true
+  role?: "presentation"
+  title?: undefined
+}
+
+/**
+ * IconProps: Accept either accessible or decorative
+ */
+export type IconProps = BaseProps & (AccessibleProps | DecorativeProps)
+
+export function withSvg(Path: JSX.Element) {
+  return ({
+    size = 20,
+    color,
+    fill = "none",
+    title,
+    ...props
+  }: IconProps) => (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      viewBox={viewBox}
       width={size}
       height={size}
-      fill="none"
-      color={color}
+      fill={fill}
+      stroke={color}
       {...props}
     >
+      {title && <title>{title}</title>}
       {Path}
     </svg>
   )
